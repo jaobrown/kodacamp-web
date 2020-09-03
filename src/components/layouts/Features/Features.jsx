@@ -12,7 +12,7 @@ export const Features = () => {
     <section>
       <div className="px-4 pt-10 sm:px-10">
         <div className="grid mx-auto max-w-screen-2xl lg:grid-cols-12 gap-x-4">
-          <div className="col-span-7 p-16 rounded-md bg-gray-50">
+          <div className="col-span-7 p-10 rounded-md sm:p-16 bg-gray-50">
             <h2 className="text-2xl font-bold leading-snug text-orange-500 md:text-4xl">
               Tutorials to guide your exploration in the world wide web of the
               Jamstack
