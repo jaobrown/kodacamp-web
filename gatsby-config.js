@@ -25,5 +25,11 @@ module.exports = {
       },
     },
     `gatsby-plugin-postcss`,
+    {
+      resolve: `gatsby-plugin-plausible`,
+      options: {
+        domain: `koda.camp`,
+      },
+    },
   ],
 }
