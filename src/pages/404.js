@@ -3,7 +3,7 @@ import React from 'react'
 import { Layout, SEO } from '@global'
 import { Hero, Features, SocialCallout } from '@layouts'
 
-const IndexPage = () => {
+const NotFoundPage = () => {
   return (
     <>
       <SEO />
@@ -16,4 +16,4 @@ const IndexPage = () => {
   )
 }
 
-export default IndexPage
+export default NotFoundPage

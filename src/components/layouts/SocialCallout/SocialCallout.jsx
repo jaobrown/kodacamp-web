@@ -1,9 +1,7 @@
 import React from 'react'
 
-// assets
-import YouTube from '@images/svg/youtube-teal.svg'
-import Instagram from '@images/svg/instagram-teal.svg'
-import Twitter from '@images/svg/twitter-teal.svg'
+//components
+import { SocialIcon } from '@elements'
 
 export const SocialCallout = () => {
   return (
@@ -20,12 +18,8 @@ export const SocialCallout = () => {
             rel="nofollow noreferrer"
           >
             <div class="flex-shrink-0">
-              <div class="flex items-center justify-center h-10">
-                <img
-                  className="w-auto h-8 sm:h-10"
-                  src={YouTube}
-                  alt="YouTube Icon"
-                />
+              <div class="flex items-center justify-center h-10 text-teal-300">
+                <SocialIcon platform="youtube" className="w-auto h-8 sm:h-10" />
               </div>
             </div>
             <div class="ml-8">
@@ -44,11 +38,10 @@ export const SocialCallout = () => {
             rel="nofollow noreferrer"
           >
             <div class="flex-shrink-0">
-              <div class="flex items-center justify-center h-10">
-                <img
+              <div class="flex items-center justify-center h-10 text-teal-300">
+                <SocialIcon
+                  platform="instagram"
                   className="w-auto h-8 sm:h-10"
-                  src={Instagram}
-                  alt="Instagram Icon"
                 />
               </div>
             </div>
@@ -68,11 +61,10 @@ export const SocialCallout = () => {
             rel="nofollow noreferrer"
           >
             <div class="flex-shrink-0">
-              <div class="flex items-center justify-center h-10">
-                <img
+              <div class="flex items-center justify-center h-10 text-teal-300">
+                <SocialIcon
+                  platform="twitter"
                   className="w-auto h-8 sm:h-10"
-                  src={Twitter}
-                  alt="Twitter Icon"
                 />
               </div>
             </div>
