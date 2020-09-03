@@ -45,8 +45,10 @@ export const Features = () => {
                 </Feature.Body>
               </Feature>
               <Feature>
-                <Feature.Tag>new</Feature.Tag>
-                <Feature.Heading>Growing Community</Feature.Heading>
+                <Feature.Heading>
+                  <Feature.Tag>new</Feature.Tag>
+                  Growing Community
+                </Feature.Heading>
                 <Feature.Body>
                   We want to make a place for developers to learn together
                 </Feature.Body>
