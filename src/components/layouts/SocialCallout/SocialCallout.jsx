@@ -9,7 +9,7 @@ export const SocialCallout = () => {
   return (
     <section className="px-4 py-24 text-white lg:py-32 sm:px-10">
       <div className="p-10 mx-auto bg-gray-800 rounded-md sm:p-16 lg:px-8 lg:py-12 max-w-screen-2xl">
-        <h2 className="text-4xl font-bold leading-snug text-center">
+        <h2 className="text-2xl font-bold leading-snug text-center sm:text-4xl">
           Find your place in the community
         </h2>
         <div className="grid max-w-6xl gap-8 mx-auto mt-12 lg:grid-cols-3">
