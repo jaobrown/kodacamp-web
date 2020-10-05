@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'gatsby'
 
 //components
 import { SocialIcon } from '@elements'
@@ -11,11 +12,19 @@ export const Header = () => {
     <div className="relative text-gray-900">
       <div className="flex items-center justify-between px-4 py-8 sm:p-12 md:justify-start md:space-x-10">
         <div className="lg:w-0 lg:flex-1">
-          <a href="/" className="flex">
+          <a href="/" className="flex w-24">
             <img className="w-auto h-12 sm:h-16" src={Logo} alt="Koda Logo" />
           </a>
         </div>
         <div className="flex items-center justify-end space-x-8 md:flex-1 lg:w-0">
+          <Link
+            to="/blog/"
+            className="mr-4 text-xl font-bold"
+            target="_blank"
+            rel="nofollow noreferrer"
+          >
+            Blog
+          </Link>
           <a
             href="https://www.youtube.com/channel/UCRwBdKKHk3_ZxYjRzUWfxPw"
             className=""
