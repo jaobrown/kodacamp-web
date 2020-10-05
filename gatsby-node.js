@@ -13,6 +13,15 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      posts: allSanityPost {
+        nodes {
+          _id
+          title
+          slug {
+            current
+          }
+        }
+      }
     }
   `)
 
@@ -25,6 +34,19 @@ exports.createPages = async ({ graphql, actions }) => {
       component: path.resolve(`./src/templates/page.jsx`),
       context: {
         _id: page._id,
+      },
+    })
+  })
+
+  // create pages
+  result.data.posts.nodes.forEach((post) => {
+    const slug = post.slug.current
+
+    createPage({
+      path: slug,
+      component: path.resolve(`./src/templates/post.jsx`),
+      context: {
+        _id: post._id,
       },
     })
   })

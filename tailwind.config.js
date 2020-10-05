@@ -1,6 +1,10 @@
 module.exports = {
   purge: ['./src/**/*.jsx'],
   theme: {
+    container: {
+      center: true,
+      padding: '1rem',
+    },
     extend: {
       screens: {
         '2xl': '1440px',
@@ -72,6 +76,9 @@ module.exports = {
           800: '#323F4B',
           900: '#1F2933',
         },
+      },
+      spacing: {
+        '9/16': '56.25%',
       },
     },
   },
