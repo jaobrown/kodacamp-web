@@ -17,6 +17,7 @@ exports.createPages = async ({ graphql, actions }) => {
         nodes {
           _id
           title
+          category
           slug {
             current
           }
@@ -25,8 +26,10 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  // create pages
-  result.data.pages.nodes.forEach((page) => {
+  const categories = []
+
+  // Create pages
+  await result.data.pages.nodes.forEach((page) => {
     const slug = page.slug ? page.slug.current : `/`
 
     createPage({
@@ -38,15 +41,26 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  // create pages
-  result.data.posts.nodes.forEach((post) => {
+  // Create posts
+  await result.data.posts.nodes.forEach((post) => {
     const slug = post.slug.current
+    categories.push(post.category)
 
     createPage({
       path: `/blog/${slug}`,
       component: path.resolve(`./src/templates/post.jsx`),
       context: {
         _id: post._id,
+      },
+    })
+  })
+
+  categories.forEach((category) => {
+    createPage({
+      path: `/blog/${category}`,
+      component: path.resolve(`./src/templates/category.jsx`),
+      context: {
+        category: category,
       },
     })
   })
