@@ -5,17 +5,35 @@ import BlockContent from '@sanity/block-content-to-react'
 
 import { Layout } from '@global'
 import { SocialCallout } from '@layouts'
-import { SocialIcon, VideoPlayer } from '@elements'
+import { SocialIcon, VideoPlayer, Tag, Post } from '@elements'
+
+const CategoryTag = ({ category, children }) => {
+  let color = ''
+  switch (category) {
+    case 'development':
+      color = 'teal'
+      break
+    case 'design':
+      color = 'orange'
+      break
+    default:
+      break
+  }
+  return <Tag color={color}>{children}</Tag>
+}
 
 const PostTemplate = ({ data }) => {
   const {
     title,
+    category,
     excerpt,
     author,
     featuredImage,
     _rawContent,
     postedDate,
   } = data.sanityPost
+
+  const { posts } = data.allSanityPost
 
   const serializers = {
     types: {
@@ -32,7 +50,9 @@ const PostTemplate = ({ data }) => {
         <section className="py-10">
           <div className="container max-w-6xl">
             <div className="max-w-3xl mx-auto">
-              <h1 className="text-4xl font-bold leading-tight text-gray-900 ">
+              {/* tag */}
+              <CategoryTag category={category}>{category}</CategoryTag>
+              <h1 className="mt-5 text-4xl font-bold leading-tight text-gray-900">
                 {title}
               </h1>
               <p className="mt-4 text-lg text-gray-700">{excerpt}</p>
@@ -83,6 +103,29 @@ const PostTemplate = ({ data }) => {
           </div>
         </section>
       </div>
+      <section className="-mb-12 mt-44">
+        <div className="mx-auto max-w-screen-2xl">
+          <h2 className="ml-5 text-4xl font-bold leading-tight text-gray-900">
+            Recent Posts
+          </h2>
+          <div className="grid grid-cols-1 gap-10 mt-5 xl:gap-15 md:grid-cols-2 xl:grid-cols-3">
+            {posts.map((post) => (
+              <Post
+                to={`/blog/${post.slug.current}/`}
+                fluid={post.featuredImage.asset.fluid}
+              >
+                <Post.Tag category={post.category}>{post.category}</Post.Tag>
+                <Post.Title>{post.title}</Post.Title>
+                <Post.Excerpt>{post.excerpt}</Post.Excerpt>
+                <Post.Author>
+                  {post.author.fName} {post.author.lName}
+                </Post.Author>
+                <Post.PostedDate>{post.postedDate}</Post.PostedDate>
+              </Post>
+            ))}
+          </div>
+        </div>
+      </section>
       <SocialCallout />
     </Layout>
   )
@@ -94,6 +137,7 @@ export const POST_QUERY = graphql`
   query($_id: String!) {
     sanityPost(_id: { eq: $_id }) {
       title
+      category
       excerpt
       postedDate(formatString: "MMM DD YYYY")
       _rawContent
@@ -115,6 +159,35 @@ export const POST_QUERY = graphql`
         photo {
           asset {
             fluid(maxWidth: 100) {
+              ...GatsbySanityImageFluid
+            }
+          }
+        }
+      }
+    }
+    allSanityPost(sort: { order: DESC, fields: postedDate }, limit: 3) {
+      posts: nodes {
+        title
+        excerpt
+        category
+        slug {
+          current
+        }
+        author {
+          fName
+          lName
+          photo {
+            asset {
+              fluid(maxWidth: 400) {
+                ...GatsbySanityImageFluid
+              }
+            }
+          }
+        }
+        postedDate(formatString: "MMM DD YYYY")
+        featuredImage {
+          asset {
+            fluid(maxWidth: 1600) {
               ...GatsbySanityImageFluid
             }
           }

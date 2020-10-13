@@ -1,46 +1,58 @@
-import React, { useEffect } from 'react'
-import { graphql, Link } from 'gatsby'
-import Img from 'gatsby-image'
+import React from 'react'
+import { graphql } from 'gatsby'
 
 import { Layout } from '@global'
+import { FeaturedPost, Post, Link } from '@elements'
 
 const BlogPage = ({ data }) => {
-  const { nodes: posts } = data.allSanityPost
+  const { posts } = data.allSanityPost
 
-  const firstPost = posts.shift()
+  const firstPost = posts[0]
 
   return (
     <Layout>
-      <div className="px-4 sm:px-12 md:px-13 lg:px-12">
-        <section className="grid grid-cols-1 gap-10 xl:gap-20 md:grid-cols-2 xl:grid-cols-3">
-          <article className="grid grid-cols-2 col-span-3">
-            <Img fluid={firstPost.featuredImage.asset.fluid} />
-            <Link to={`/blog/${firstPost.slug.current}/`}>
-              <span>{firstPost.category}</span>
-              <h3>{firstPost.title}</h3>
-              <p>{firstPost.excerpt}</p>
-              <p>
-                {firstPost.author.fName} {firstPost.author.lName}
-              </p>
-              <div>{firstPost.postedDate}</div>
-            </Link>
-          </article>
-          {posts.map((post) => {
-            return (
-              <Link to={`/blog/${post.slug.current}/`}>
-                <article>
-                  <Img fluid={post.featuredImage.asset.fluid} />
-                  <span>{post.category}</span>
-                  <h3>{post.title}</h3>
-                  <p>{post.excerpt}</p>
-                  <p>
+      {/* // todo: Style blog nav */}
+      <nav className="py-10 border-b-4 border-gray-100">
+        <Link to="/blog/">All</Link>
+        <Link to="/blog/development">Development</Link>
+        <Link to="/blog/design">Design</Link>
+      </nav>
+      <div className="px-4 pb-20 mt-15 sm:px-12 md:px-13 lg:px-12">
+        <section className="grid grid-cols-1 gap-10 xl:gap-15 md:grid-cols-2 xl:grid-cols-3">
+          <FeaturedPost
+            to={`/blog/${firstPost.slug.current}/`}
+            fluid={firstPost.featuredImage.asset.fluid}
+          >
+            <FeaturedPost.Tag category={firstPost.category}>
+              {firstPost.category}
+            </FeaturedPost.Tag>
+            <FeaturedPost.Title>{firstPost.title}</FeaturedPost.Title>
+            <FeaturedPost.Excerpt>{firstPost.excerpt}</FeaturedPost.Excerpt>
+            <FeaturedPost.Author fluid={firstPost.author.photo.asset.fluid}>
+              {firstPost.author.fName} {firstPost.author.lName}
+            </FeaturedPost.Author>
+            <FeaturedPost.PostedDate>
+              {firstPost.postedDate}
+            </FeaturedPost.PostedDate>
+          </FeaturedPost>
+          {posts
+            .filter((post) => posts.indexOf(post) !== 0)
+            .map((post) => {
+              return (
+                <Post
+                  to={`/blog/${post.slug.current}/`}
+                  fluid={post.featuredImage.asset.fluid}
+                >
+                  <Post.Tag category={post.category}>{post.category}</Post.Tag>
+                  <Post.Title>{post.title}</Post.Title>
+                  <Post.Excerpt>{post.excerpt}</Post.Excerpt>
+                  <Post.Author>
                     {post.author.fName} {post.author.lName}
-                  </p>
-                  <div>{post.postedDate}</div>
-                </article>
-              </Link>
-            )
-          })}
+                  </Post.Author>
+                  <Post.PostedDate>{post.postedDate}</Post.PostedDate>
+                </Post>
+              )
+            })}
         </section>
       </div>
     </Layout>
@@ -52,7 +64,7 @@ export default BlogPage
 export const BLOG_QUERY = graphql`
   query {
     allSanityPost(sort: { order: DESC, fields: postedDate }) {
-      nodes {
+      posts: nodes {
         title
         excerpt
         category
@@ -62,11 +74,18 @@ export const BLOG_QUERY = graphql`
         author {
           fName
           lName
+          photo {
+            asset {
+              fluid(maxWidth: 400) {
+                ...GatsbySanityImageFluid
+              }
+            }
+          }
         }
         postedDate(formatString: "MMM DD YYYY")
         featuredImage {
           asset {
-            fluid(maxWidth: 400) {
+            fluid(maxWidth: 1600) {
               ...GatsbySanityImageFluid
             }
           }

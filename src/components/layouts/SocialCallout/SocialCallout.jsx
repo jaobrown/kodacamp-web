@@ -62,10 +62,7 @@ export const SocialCallout = () => {
           >
             <div class="flex-shrink-0">
               <div class="flex items-center justify-center h-10 text-teal-300">
-                <SocialIcon
-                  platform="twitter"
-                  className="w-auto h-8 sm:h-10"
-                />
+                <SocialIcon platform="twitter" className="w-auto h-8 sm:h-10" />
               </div>
             </div>
             <div class="ml-8">

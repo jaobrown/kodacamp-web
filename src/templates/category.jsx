@@ -1,34 +1,34 @@
 import React from 'react'
-import { graphql, Link } from 'gatsby'
-import Img from 'gatsby-image'
+import { graphql } from 'gatsby'
 
 import { Layout } from '@global'
+import { Post } from '@elements'
 
 const CategoryTemplate = ({ data }) => {
   const { nodes: posts } = data.allSanityPost
 
   return (
     <Layout>
-      <div className="container">
-        <section className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="px-4 pb-20 sm:px-12 md:px-13 lg:px-12">
+        <div className="grid grid-cols-1 gap-10 xl:gap-15 md:grid-cols-2 xl:grid-cols-3">
           {posts.map((post) => {
             return (
-              <Link to={`/blog/${post.slug.current}/`}>
-                <article>
-                  <span>{post.category}</span>
-                  <Img fluid={post.featuredImage.asset.fluid} />
-                  <h3>{post.title}</h3>
-                  <p>{post.excerpt}</p>
-                  <p>
-                    {post.author.fName} {post.author.lName}
-                  </p>
-                  <div>{post.postedDate}</div>
-                </article>
-              </Link>
+              <Post
+                to={`/blog/${post.slug.current}/`}
+                fluid={post.featuredImage.asset.fluid}
+              >
+                <Post.Tag category={post.category}>{post.category}</Post.Tag>
+                <Post.Title>{post.title}</Post.Title>
+                <Post.Excerpt>{post.excerpt}</Post.Excerpt>
+                <Post.Author>
+                  {post.author.fName} {post.author.lName}
+                </Post.Author>
+                <Post.PostedDate>{post.postedDate}</Post.PostedDate>
+              </Post>
             )
           })}
-        </section>
-      </div>
+        </div>
+      </section>
     </Layout>
   )
 }

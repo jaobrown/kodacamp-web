@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { Link } from '@elements'
 
 //components
 import { SocialIcon } from '@elements'
