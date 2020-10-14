@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 
 import { Layout } from '@global'
-import { FeaturedPost, Post, Link } from '@elements'
+import { FeaturedPost, Post, BlogNav } from '@elements'
 
 const BlogPage = ({ data }) => {
   const { posts } = data.allSanityPost
@@ -11,13 +11,8 @@ const BlogPage = ({ data }) => {
 
   return (
     <Layout>
-      {/* // todo: Style blog nav */}
-      <nav className="py-10 border-b-4 border-gray-100">
-        <Link to="/blog/">All</Link>
-        <Link to="/blog/development">Development</Link>
-        <Link to="/blog/design">Design</Link>
-      </nav>
-      <div className="px-4 pb-20 mt-15 sm:px-12 md:px-13 lg:px-12">
+      <BlogNav />
+      <div className="px-4 pb-20 mx-auto mt-15 sm:px-12 md:px-13 lg:px-12 max-w-screen-2xl">
         <section className="grid grid-cols-1 gap-10 xl:gap-15 md:grid-cols-2 xl:grid-cols-3">
           <FeaturedPost
             to={`/blog/${firstPost.slug.current}/`}

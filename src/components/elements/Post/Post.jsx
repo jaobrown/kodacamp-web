@@ -24,7 +24,7 @@ Post.Tag = ({ category, children }) => {
       color = 'teal'
       break
     case 'design':
-      color = 'orange'
+      color = 'red'
       break
     default:
       break

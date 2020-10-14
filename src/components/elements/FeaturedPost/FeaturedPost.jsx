@@ -37,7 +37,7 @@ FeaturedPost.Tag = ({ category, children }) => {
 
 FeaturedPost.Title = ({ children }) => {
   return (
-    <h3 className="mt-3 text-4xl font-bold leading-tight text-gray-900">
+    <h3 className="mt-3 text-3xl font-bold leading-tight text-gray-900 md:text-4xl">
       {children}
     </h3>
   )
@@ -52,8 +52,8 @@ FeaturedPost.Excerpt = ({ children }) => {
 FeaturedPost.Author = ({ to, fluid, children }) => {
   return (
     <Link to={to} className="mt-7">
-      <Img fluid={fluid} className="w-10 h-10 rounded-full" />
-      <p className="mt-1 text-lg font-bold text-gray-900">{children}</p>
+      <Img fluid={fluid} className="hidden w-10 h-10 rounded-full md:block" />
+      <p className="text-lg font-bold text-gray-900 md:mt-1">{children}</p>
     </Link>
   )
 }

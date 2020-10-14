@@ -4,3 +4,4 @@ export * from './Tag'
 export * from './FeaturedPost'
 export * from './Post'
 export * from './Link'
+export * from "./BlogNav"

@@ -4,8 +4,8 @@ export const Tag = ({ color, className, children }) => {
   let colorClasses = ''
 
   switch (color) {
-    case 'orange':
-      colorClasses = 'bg-orange-100 text-orange-800'
+    case 'red':
+      colorClasses = 'bg-red-50 text-red-800'
       break
     case 'teal':
       colorClasses = 'text-teal-800 bg-teal-100'

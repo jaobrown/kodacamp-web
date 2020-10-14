@@ -2,14 +2,15 @@ import React from 'react'
 import { graphql } from 'gatsby'
 
 import { Layout } from '@global'
-import { Post } from '@elements'
+import { Post, BlogNav } from '@elements'
 
 const CategoryTemplate = ({ data }) => {
   const { nodes: posts } = data.allSanityPost
 
   return (
     <Layout>
-      <section className="px-4 pb-20 sm:px-12 md:px-13 lg:px-12">
+      <BlogNav />
+      <section className="px-4 pb-20 mx-auto sm:px-12 md:px-13 lg:px-12 mt-15 max-w-screen-2xl">
         <div className="grid grid-cols-1 gap-10 xl:gap-15 md:grid-cols-2 xl:grid-cols-3">
           {posts.map((post) => {
             return (
