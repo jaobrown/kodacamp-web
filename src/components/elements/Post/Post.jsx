@@ -54,6 +54,10 @@ Post.Author = ({ children }) => {
   return <p className="text-lg font-bold text-gray-900 mt-7">{children}</p>
 }
 
-Post.PostedDate = ({ children }) => {
-  return <div className="text-sm font-light text-gray-900">{children}</div>
+Post.PostedDate = ({ children, className }) => {
+  return (
+    <div className={`text-sm font-light text-gray-900 ${className}`}>
+      {children}
+    </div>
+  )
 }

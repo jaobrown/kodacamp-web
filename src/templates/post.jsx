@@ -14,7 +14,7 @@ const CategoryTag = ({ category, children }) => {
       color = 'teal'
       break
     case 'design':
-      color = 'orange'
+      color = 'red'
       break
     default:
       break
@@ -28,7 +28,7 @@ const PostTemplate = ({ data }) => {
     category,
     excerpt,
     author,
-    featuredImage,
+    heroImage,
     _rawContent,
     postedDate,
   } = data.sanityPost
@@ -89,7 +89,7 @@ const PostTemplate = ({ data }) => {
               </div>
             </div>
             <Img
-              fluid={featuredImage.asset.fluid}
+              fluid={heroImage.asset.fluid}
               className="w-full h-auto mt-13"
             />
           </div>
@@ -112,15 +112,14 @@ const PostTemplate = ({ data }) => {
             {posts.map((post) => (
               <Post
                 to={`/blog/${post.slug.current}/`}
-                fluid={post.featuredImage.asset.fluid}
+                fluid={post.thumbnailImage.asset.fluid}
               >
                 <Post.Tag category={post.category}>{post.category}</Post.Tag>
                 <Post.Title>{post.title}</Post.Title>
                 <Post.Excerpt>{post.excerpt}</Post.Excerpt>
-                <Post.Author>
-                  {post.author.fName} {post.author.lName}
-                </Post.Author>
-                <Post.PostedDate>{post.postedDate}</Post.PostedDate>
+                <Post.PostedDate className="mt-7">
+                  {post.postedDate}
+                </Post.PostedDate>
               </Post>
             ))}
           </div>
@@ -141,7 +140,7 @@ export const POST_QUERY = graphql`
       excerpt
       postedDate(formatString: "MMM DD YYYY")
       _rawContent
-      featuredImage {
+      heroImage {
         asset {
           fluid {
             ...GatsbySanityImageFluid
@@ -185,7 +184,7 @@ export const POST_QUERY = graphql`
           }
         }
         postedDate(formatString: "MMM DD YYYY")
-        featuredImage {
+        thumbnailImage {
           asset {
             fluid(maxWidth: 1600) {
               ...GatsbySanityImageFluid

@@ -16,7 +16,7 @@ const CategoryTemplate = ({ data }) => {
             return (
               <Post
                 to={`/blog/${post.slug.current}/`}
-                fluid={post.featuredImage.asset.fluid}
+                fluid={post.thumbnailImage.asset.fluid}
               >
                 <Post.Tag category={post.category}>{post.category}</Post.Tag>
                 <Post.Title>{post.title}</Post.Title>
@@ -51,7 +51,7 @@ export const CATEGORY_QUERY = graphql`
           lName
         }
         postedDate(formatString: "MMM DD YYYY")
-        featuredImage {
+        thumbnailImage {
           asset {
             fluid(maxWidth: 400) {
               ...GatsbySanityImageFluid

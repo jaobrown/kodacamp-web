@@ -36,7 +36,7 @@ const BlogPage = ({ data }) => {
               return (
                 <Post
                   to={`/blog/${post.slug.current}/`}
-                  fluid={post.featuredImage.asset.fluid}
+                  fluid={post.thumbnailImage.asset.fluid}
                 >
                   <Post.Tag category={post.category}>{post.category}</Post.Tag>
                   <Post.Title>{post.title}</Post.Title>
@@ -80,7 +80,14 @@ export const BLOG_QUERY = graphql`
         postedDate(formatString: "MMM DD YYYY")
         featuredImage {
           asset {
-            fluid(maxWidth: 1600) {
+            fluid(maxWidth: 645) {
+              ...GatsbySanityImageFluid
+            }
+          }
+        }
+        thumbnailImage {
+          asset {
+            fluid(maxWidth: 365) {
               ...GatsbySanityImageFluid
             }
           }
