@@ -81,6 +81,16 @@ module.exports = {
         '9/16': '56.25%',
       },
     },
+    typography: (theme) => ({
+      default: {
+        css: {
+          color: theme('colors.gray.900'),
+          h1: {
+            fontWeight: 700,
+          },
+        },
+      },
+    }),
   },
   variants: {},
   plugins: [require('@tailwindcss/ui')],
