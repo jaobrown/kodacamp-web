@@ -5,3 +5,4 @@ export * from './FeaturedPost'
 export * from './Post'
 export * from './Link'
 export * from "./BlogNav"
+export * from "./Icon"

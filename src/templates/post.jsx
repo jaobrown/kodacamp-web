@@ -4,8 +4,8 @@ import Img from 'gatsby-image'
 import BlockContent from '@sanity/block-content-to-react'
 
 import { Layout } from '@global'
-import { SocialCallout } from '@layouts'
-import { SocialIcon, VideoPlayer, Tag, Post } from '@elements'
+import { SocialCallout, RecentPosts } from '@layouts'
+import { SocialIcon, VideoPlayer, Tag, Icon } from '@elements'
 
 const CategoryTag = ({ category, children }) => {
   let color = ''
@@ -20,6 +20,12 @@ const CategoryTag = ({ category, children }) => {
       break
   }
   return <Tag color={color}>{children}</Tag>
+}
+
+const scrollToTop = () => {
+  if (typeof window) {
+    window.scrollTo(0, 0)
+  }
 }
 
 const PostTemplate = ({ data }) => {
@@ -95,36 +101,35 @@ const PostTemplate = ({ data }) => {
           </div>
         </section>
         {/* content */}
-        <section className="pt-10">
-          <div className="container">
-            <div className="max-w-3xl mx-auto prose sm:prose-lg">
+        <section className="relative pt-10">
+          {/* Sticky Button on Desktop */}
+          <button
+            className="sticky hidden p-5 text-orange-500 transition duration-75 transform -translate-x-5 translate-y-5 rounded-md xl:block top-64 hover:bg-gray-50"
+            onClick={() => scrollToTop()}
+          >
+            <Icon icon="arrow-up" className="" />
+            <span className="inline-block mt-4 font-bold tracking-wider text-gray-400 uppercase">
+              back to top
+            </span>
+          </button>
+          <div className="container xl:-mt-20">
+            <div className="relative max-w-3xl mx-auto prose sm:prose-lg">
               <BlockContent blocks={_rawContent} serializers={serializers} />
+              {/* Button on Mobile */}
+              <button
+                className="mt-16 text-orange-500 xl:hidden"
+                onClick={() => scrollToTop()}
+              >
+                <Icon icon="arrow-up" className="" />
+                <span className="inline-block mt-4 font-bold tracking-wider text-gray-400 uppercase">
+                  back to top
+                </span>
+              </button>
             </div>
           </div>
         </section>
       </div>
-      <section className="-mb-12 mt-44">
-        <div className="mx-auto max-w-screen-2xl">
-          <h2 className="ml-5 text-4xl font-bold leading-tight text-gray-900">
-            Recent Posts
-          </h2>
-          <div className="grid grid-cols-1 gap-10 mt-5 xl:gap-15 md:grid-cols-2 xl:grid-cols-3">
-            {posts.map((post) => (
-              <Post
-                to={`/blog/${post.slug.current}/`}
-                fluid={post.thumbnailImage.asset.fluid}
-              >
-                <Post.Tag category={post.category}>{post.category}</Post.Tag>
-                <Post.Title>{post.title}</Post.Title>
-                <Post.Excerpt>{post.excerpt}</Post.Excerpt>
-                <Post.PostedDate className="mt-7">
-                  {post.postedDate}
-                </Post.PostedDate>
-              </Post>
-            ))}
-          </div>
-        </div>
-      </section>
+      <RecentPosts posts={posts} />
       <SocialCallout />
     </Layout>
   )
