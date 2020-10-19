@@ -35,6 +35,7 @@ const PostTemplate = ({ data }) => {
     excerpt,
     author,
     heroImage,
+    featuredImage,
     _rawContent,
     postedDate,
   } = data.sanityPost
@@ -94,9 +95,15 @@ const PostTemplate = ({ data }) => {
                 ))}
               </div>
             </div>
+            {/* Desktop gets hero */}
             <Img
               fluid={heroImage.asset.fluid}
-              className="w-full h-auto mt-13"
+              className="hidden w-full h-auto mt-13 lg:block"
+            />
+            {/* Mobile gets featured */}
+            <Img
+              fluid={featuredImage.asset.fluid}
+              className="block w-full h-auto mt-13 lg:hidden"
             />
           </div>
         </section>
@@ -148,6 +155,13 @@ export const POST_QUERY = graphql`
       heroImage {
         asset {
           fluid {
+            ...GatsbySanityImageFluid
+          }
+        }
+      }
+      featuredImage {
+        asset {
+          fluid(maxWidth: 645) {
             ...GatsbySanityImageFluid
           }
         }
