@@ -83,11 +83,11 @@ const PostTemplate = ({ data }) => {
                 </div>
               </div>
               {/* socials */}
-              <div className="flex items-center w-full mt-4 sm:mt-0 sm:ml-auto sm:justify-end sm:w-auto">
+              <div className="flex items-center w-full mt-6 sm:mt-0 sm:ml-auto sm:justify-end sm:w-auto">
                 {author.socials.map((social) => (
                   <a
                     href={`${social.link}`}
-                    className="inline-flex mr-4 text-gray-900 sm:ml-4"
+                    className="inline-flex mr-4 text-gray-600 sm:text-gray-900 sm:ml-4"
                   >
                     <SocialIcon platform={social.name} className="w-auto h-5" />
                   </a>

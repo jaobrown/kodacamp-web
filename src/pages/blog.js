@@ -16,7 +16,8 @@ const BlogPage = ({ data }) => {
         <section className="grid grid-cols-1 gap-10 xl:gap-15 md:grid-cols-2 xl:grid-cols-3">
           <FeaturedPost
             to={`/blog/${firstPost.slug.current}/`}
-            fluid={firstPost.featuredImage.asset.fluid}
+            fluidMobile={firstPost.thumbnailImage.asset.fluid}
+            fluidDesktop={firstPost.featuredImage.asset.fluid}
           >
             <FeaturedPost.Tag category={firstPost.category}>
               {firstPost.category}

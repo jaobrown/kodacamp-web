@@ -3,7 +3,7 @@ import { Post } from '@elements'
 
 export const RecentPosts = ({ posts }) => {
   return (
-    <section className="-mb-12 mt-44">
+    <section className="-mb-12 mt-15 md:mt-20 xl:mt-44">
       <div className="mx-auto max-w-screen-2xl">
         <h2 className="ml-5 text-4xl font-bold leading-tight text-gray-900">
           Recent Posts

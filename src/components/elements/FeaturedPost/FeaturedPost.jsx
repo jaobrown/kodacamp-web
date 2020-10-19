@@ -2,14 +2,17 @@ import React from 'react'
 import Img from 'gatsby-image'
 import { Tag, Link } from '@elements'
 
-export const FeaturedPost = ({ to, fluid, children }) => {
+export const FeaturedPost = ({ to, fluidDesktop, fluidMobile, children }) => {
   return (
     <article className="md:col-span-2 xl:col-span-3">
       <Link
         to={to}
         className="grid grid-cols-1 p-5 transition duration-75 rounded-md xl:grid-cols-2 hover:bg-gray-50"
       >
-        <Img fluid={fluid} />
+        {/* Desktop Image */}
+        <Img fluid={fluidDesktop} className="hidden md:block" />
+        {/* Mobile Image */}
+        <Img fluid={fluidMobile} className="block md:hidden" />
         <div className="flex flex-col justify-center xl:pl-16">{children}</div>
       </Link>
     </article>
@@ -23,7 +26,7 @@ FeaturedPost.Tag = ({ category, children }) => {
       color = 'teal'
       break
     case 'design':
-      color = 'orange'
+      color = 'red'
       break
     default:
       break

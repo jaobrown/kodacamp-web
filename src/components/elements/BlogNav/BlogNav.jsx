@@ -17,7 +17,7 @@ export const BlogNav = () => {
   return (
     <div className="px-4 mt-4 border-b-4 sm:mt-0 sm:px-0 border-gray-50">
       <nav className="flex justify-between max-w-4xl mx-auto overflow-x-scroll sm:overflow-x-visible sm:overflow-y-visible">
-        <span className="mr-6 font-bold tracking-wider text-gray-900 uppercase sm:hidden">
+        <span className="mr-10 font-bold tracking-wider text-gray-900 uppercase sm:hidden">
           Category:
         </span>
         <TabLink to="/blog/">All</TabLink>
