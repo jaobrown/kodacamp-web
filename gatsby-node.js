@@ -26,7 +26,8 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  const categories = []
+  //! temporary - until we have a design post
+  const categories = ['development', 'design']
 
   // Create pages
   await result.data.pages.nodes.forEach((page) => {
@@ -44,7 +45,8 @@ exports.createPages = async ({ graphql, actions }) => {
   // Create posts
   await result.data.posts.nodes.forEach((post) => {
     const slug = post.slug.current
-    categories.push(post.category)
+    // todo: bring this puppy back
+    // categories.push(post.category)
 
     createPage({
       path: `/blog/${slug}`,
