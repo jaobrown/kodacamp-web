@@ -1,6 +1,10 @@
 module.exports = {
   purge: ['./src/**/*.jsx'],
   theme: {
+    container: {
+      center: true,
+      padding: '1rem',
+    },
     extend: {
       screens: {
         '2xl': '1440px',
@@ -73,11 +77,25 @@ module.exports = {
           900: '#1F2933',
         },
       },
+      spacing: {
+        '9/16': '56.25%',
+      },
     },
+    typography: (theme) => ({
+      default: {
+        css: {
+          color: theme('colors.gray.900'),
+          h1: {
+            fontWeight: 700,
+          },
+        },
+      },
+    }),
   },
   variants: {},
   plugins: [require('@tailwindcss/ui')],
   future: {
     removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
   },
 }
